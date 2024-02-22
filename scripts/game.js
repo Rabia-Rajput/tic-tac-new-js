@@ -77,4 +77,14 @@ function checkGameOver(){
             }
             return 0;
         }
+        function endGame (winnerId){
+            gameOverElement.style.display = 'block';
+            if (winnerId > 0){
+            const winnerName = players[winnerId -1].name;
+            gameOverElement.firstElementChild.firstElementChild.textContent = winnerName;
+        } else {
+            gameOverElement.firstElementChild.textContent = 'it\'s a draw!'
+
+        }
+          }
      
