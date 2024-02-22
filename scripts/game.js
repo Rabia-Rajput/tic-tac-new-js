@@ -1,6 +1,7 @@
 function resetGameStatus(){
     activePlayer = 0;
     currentRound = 1;
+    gameIsOver = false;
     gameOverElement.firstElementChild.innerHTML = 'You won, <span id="winner-name">PLAYER NAME</span>!';
     gameOverElement.style.display = 'none';
     let gameBoardIndex = 0;
@@ -9,7 +10,7 @@ function resetGameStatus(){
 
             gameData[i][j] = 0;
             const gameBoardItemElement = gameBoardElement.children[gameBoardIndex];
-            gameBoardElement.textContent = '';
+            gameBoardItemElement.textContent = '';
             gameBoardItemElement.classList.remove('disabled');
             gameBoardIndex++;
         }
@@ -22,6 +23,8 @@ function startNewGame(){
     alert('please set name for both players');
     return;
 }
+
+resetGameStatus();
 activePlayerNameElement.textContent = players[activePlayer].name;
 
 gameAreaElement.style.display = 'block';
@@ -37,7 +40,7 @@ activePlayerNameElement.textContent = players[activePlayer].name;
   }
 
 function selectGameField(event){
-    if (event.target.tagName !== 'LI'){
+    if (event.target.tagName !== 'LI' || gameIsOver){
         return;
     }
     const selectedField = event.target;
@@ -101,6 +104,7 @@ function checkGameOver(){
             return 0;
         }
         function endGame (winnerId){
+            gameIsOver = true;
             gameOverElement.style.display = 'block';
             if (winnerId > 0){
             const winnerName = players[winnerId -1].name;
