@@ -1,7 +1,19 @@
 function resetGameStatus(){
     activePlayer = 0;
     currentRound = 1;
-    gameOverElement.firstElementChild.innerHTML = 'You won, <span id="winner-name">PLAYER NAME</span>!'
+    gameOverElement.firstElementChild.innerHTML = 'You won, <span id="winner-name">PLAYER NAME</span>!';
+    gameOverElement.style.display = 'none';
+    let gameBoardIndex = 0;
+     for (let i = 0; i<3; i++){
+        for (let j=0; j<3; j++){
+
+            gameData[i][j] = 0;
+            const gameBoardItemElement = gameBoardElement.children[gameBoardIndex];
+            gameBoardElement.textContent = '';
+            gameBoardItemElement.classList.remove('disabled');
+            gameBoardIndex++;
+        }
+     }
 }
 
 
